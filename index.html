@@ -10,11 +10,17 @@
 
 <body>
     <div class="wrapper">
-        <h1>Art Institute of Chicago</h1>
+        <h1>Art Institute of Chicago API</h1>
 
-        <h2>Art containing the keyword 'penguin'</h2>
+        <h2>Demonstration of how the Art Institute of Chicago's API allows us to dynamically find artworks</h2>
 
-        <ul id="penguinList">
+        <form id="searchBar">
+            <input type="text" id="userInput" name="userInput" placeholder="Search for art">
+            <input type="submit" value="Submit">
+          </form>
+
+          <h2 id="searchHeading"> </h2>
+        <ul id="artList">
         </ul>
 
         <footer>

@@ -1,3 +1,38 @@
+body{
+    background-color: rgb(194, 223, 200);
+}
+
+.wrapper{
+    width: 1000px;
+    margin: auto;
+    background-color: rgb(194, 223, 200);
+    text-align: center;
+}
+
+h1{
+    margin-top: 100px;
+    font-size: 5em;
+    color:rgb(97, 97, 97);
+}
+
+h2{
+    width: 600px;
+    margin: auto;
+    color:rgb(97, 97, 97);
+}
+
+#searchBar{
+    margin: 30px;
+}
+
+#userInput {
+    width: 250px;
+    text-align: center;
+}
+#userInput::placeholder {
+    text-align: center;
+}
+
 ul{
     list-style: none;
 }

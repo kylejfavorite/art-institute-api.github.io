@@ -1,50 +1,55 @@
-var xhrPenguin = new XMLHttpRequest();
+document.getElementById('searchBar').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-var UrlPenguin = 'https://api.artic.edu/api/v1/artworks/search?q=penguin&fields=id,title,image_id,artist_display';
+  var userInput = document.getElementById('userInput').value;
 
-xhrPenguin.open("GET", UrlPenguin);
+  if (userInput != ""){
+  document.getElementById('artList').innerHTML = '';
 
-xhrPenguin.send();
+  document.getElementById('searchHeading').innerHTML = 'Art containing the word "' +  userInput + '"';
+ 
+  var xhrList = new XMLHttpRequest();
 
-xhrPenguin.addEventListener("load", function () {
-  if (xhrPenguin.status == 200 && xhrPenguin.readyState == 4) {
+  var UrlArt = 'https://api.artic.edu/api/v1/artworks/search?q=' + encodeURIComponent(userInput) + '&fields=id,title,image_id,artist_display';
 
-    var response = JSON.parse(xhrPenguin.responseText);
+  xhrList.open("GET", UrlArt);
 
-    var resultArray = response.data;
+  xhrList.addEventListener("load", function () {
+    if (xhrList.status == 200 && xhrList.readyState == 4) {
+      var response = JSON.parse(xhrList.responseText);
+      var resultArray = response.data;
+      var artList = document.getElementById('artList');
 
-    var penguinList = document.getElementById('penguinList')
+      resultArray.forEach(function (currentValue, index, array) {
+        if (currentValue.image_id != null) {
+          var listItem = document.createElement('li');
+          listItem.id = 'resource-' + index;
 
-    resultArray.forEach(function (currentValue, index, array) {
+          var image = document.createElement('img');
+          image.src = 'https://www.artic.edu/iiif/2/' + currentValue.image_id + '/full/843,/0/default.jpg';
 
-      if (currentValue.image_id != null) {
-     
-        var listItem = document.createElement('li');
-        listItem.id = 'resource-' + index;
+          var title = document.createElement('p');
+          title.textContent = currentValue.title;
 
-        var image = document.createElement('img');
+          var artist = document.createElement('p');
+          artist.textContent = currentValue.artist_display;
 
-        image.src = 'https://www.artic.edu/iiif/2/' + currentValue.image_id + '/full/843,/0/default.jpg';
+          listItem.appendChild(image);
+          listItem.appendChild(title);
+          listItem.appendChild(artist);
 
-        var title = document.createElement('p');
+          artList.appendChild(listItem);
+        }
+      });
+    }
+  });
 
-        title.textContent = currentValue.title;
+  xhrList.send();
 
-        var artist = document.createElement('p');
+  console.group('Name');
+  console.log('First Name: Kyle');
+  console.log('Last Name: Favorite');
+  console.groupEnd();
+}
 
-        artist.textContent = currentValue.artist_display;
-
-        listItem.appendChild(image);
-        listItem.appendChild(title);
-        listItem.appendChild(artist);
-
-        penguinList.appendChild(listItem);
-      }
-    });
-  }})
-
-
-console.group('Name')
-console.log('First Name: Kyle');
-console.log('Last Name: Favorite');
-console.groupEnd();
+});
