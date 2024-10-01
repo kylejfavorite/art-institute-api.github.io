@@ -1,6 +1,6 @@
 var xhrPenguin = new XMLHttpRequest();
 
-var UrlPenguin = 'https://api.artic.edu/api/v1/artworks/search?q=beach&fields=id,title,image_id,artist_display';
+var UrlPenguin = 'https://api.artic.edu/api/v1/artworks/search?q=penguin&fields=id,title,image_id,artist_display';
 
 xhrPenguin.open("GET", UrlPenguin);
 
